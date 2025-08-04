@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
 import { getStoredUser, logout, type AdminUser } from '@/lib/auth';
 
 export default function AdminHeader() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const router = useRouter();
+  const pathname = usePathname();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [user, setUser] = useState<AdminUser | null>(null);
 
@@ -14,11 +16,16 @@ export default function AdminHeader() {
   }, []);
 
   const tabs = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'services', label: 'Services' },
-    { id: 'analytics', label: 'Analytics' },
+    { id: 'dashboard', label: 'Dashboard', href: '/admin' },
+    { id: 'projects', label: 'Projects', href: '/admin/projects' },
+    { id: 'services', label: 'Services', href: '/admin/services' },
+    { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
   ];
+
+  const getActiveTab = () => {
+    const tab = tabs.find(tab => tab.href === pathname || (tab.href === '/admin' && pathname === '/admin'));
+    return tab?.id || 'dashboard';
+  };
 
   return (
     <header className="bg-dark-900 border-b border-dark-700 px-6 py-4">
@@ -32,9 +39,9 @@ export default function AdminHeader() {
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => router.push(tab.href)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeTab === tab.id
+                  getActiveTab() === tab.id
                     ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/20'
                     : 'text-gray-300 hover:bg-dark-800 hover:text-white'
                 }`}
@@ -71,7 +78,10 @@ export default function AdminHeader() {
                     <User className="w-4 h-4" />
                     <span>Profile</span>
                   </button>
-                  <button className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-dark-700 hover:text-white">
+                  <button 
+                    onClick={() => router.push('/admin/settings')}
+                    className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-300 hover:bg-dark-700 hover:text-white"
+                  >
                     <Settings className="w-4 h-4" />
                     <span>Settings</span>
                   </button>

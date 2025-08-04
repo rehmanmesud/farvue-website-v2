@@ -341,7 +341,10 @@ export default function ClientsPage() {
                   </div>
                 </div>
                 <div className="relative">
-                  <button className="text-gray-400 hover:text-white transition-colors duration-200">
+                  <button 
+                    onClick={() => alert(`More actions for ${client.name}`)}
+                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                  >
                     <MoreHorizontal className="w-5 h-5" />
                   </button>
                 </div>
@@ -386,10 +389,16 @@ export default function ClientsPage() {
                   <Eye className="w-4 h-4 inline mr-1" />
                   View Details
                 </button>
-                <button className="px-3 py-2 bg-dark-800 hover:bg-dark-700 text-white text-sm rounded-lg transition-colors duration-200">
+                <button 
+                  onClick={() => alert(`Edit ${client.name}`)}
+                  className="px-3 py-2 bg-dark-800 hover:bg-dark-700 text-white text-sm rounded-lg transition-colors duration-200"
+                >
                   <Edit3 className="w-4 h-4" />
                 </button>
-                <button className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors duration-200">
+                <button 
+                  onClick={() => alert(`Delete ${client.name}?`)}
+                  className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors duration-200"
+                >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
@@ -458,10 +467,16 @@ export default function ClientsPage() {
                         >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200">
+                        <button 
+                          onClick={() => alert(`Edit ${client.name}`)}
+                          className="p-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200"
+                        >
                           <Edit3 className="w-4 h-4" />
                         </button>
-                        <button className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200">
+                        <button 
+                          onClick={() => alert(`Delete ${client.name}?`)}
+                          className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -603,15 +618,24 @@ export default function ClientsPage() {
 
             <div className="p-6 border-t border-dark-700">
               <div className="flex gap-4">
-                <button className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200">
+                <button 
+                  onClick={() => alert(`Send message to ${selectedClient.name}`)}
+                  className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
+                >
                   <MessageSquare className="w-4 h-4 inline mr-2" />
                   Send Message
                 </button>
-                <button className="px-4 py-2 bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition-colors duration-200">
+                <button 
+                  onClick={() => alert(`Create new project for ${selectedClient.name}`)}
+                  className="px-4 py-2 bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition-colors duration-200"
+                >
                   <Plus className="w-4 h-4 inline mr-2" />
                   New Project
                 </button>
-                <button className="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200">
+                <button 
+                  onClick={() => alert(`Edit ${selectedClient.name} details`)}
+                  className="px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200"
+                >
                   <Edit3 className="w-4 h-4 inline mr-2" />
                   Edit Client
                 </button>

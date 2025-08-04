@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   Settings, 
   User, 
@@ -65,6 +66,7 @@ interface NotificationSettings {
 }
 
 export default function SettingsPage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('general');
   const [userRoles, setUserRoles] = useState<UserRole[]>([]);
   const [apiKeys, setApiKeys] = useState<APIKey[]>([]);
@@ -350,11 +352,17 @@ export default function SettingsPage() {
                         </div>
                         <div className="flex items-center space-x-3">
                           <span className="text-sm text-gray-400">{role.userCount} users</span>
-                          <button className="p-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200">
+                          <button 
+                            onClick={() => alert('Edit role functionality would be implemented here')}
+                            className="p-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200"
+                          >
                             <Edit3 className="w-4 h-4" />
                           </button>
                           {role.name !== 'Admin' && (
-                            <button className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200">
+                            <button 
+                              onClick={() => alert('Delete role functionality would be implemented here')}
+                              className="p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200"
+                            >
                               <Trash2 className="w-4 h-4" />
                             </button>
                           )}
@@ -378,7 +386,10 @@ export default function SettingsPage() {
                   ))}
                 </div>
 
-                <button className="w-full p-4 border-2 border-dashed border-dark-600 rounded-lg text-gray-400 hover:border-accent-500 hover:text-accent-500 transition-colors duration-200 flex items-center justify-center space-x-2">
+                <button 
+                  onClick={() => alert('Add new role functionality would be implemented here')}
+                  className="w-full p-4 border-2 border-dashed border-dark-600 rounded-lg text-gray-400 hover:border-accent-500 hover:text-accent-500 transition-colors duration-200 flex items-center justify-center space-x-2"
+                >
                   <Plus className="w-5 h-5" />
                   <span>Add New Role</span>
                 </button>
@@ -835,19 +846,31 @@ export default function SettingsPage() {
                         <div className="flex gap-2">
                           {integration.status === 'connected' ? (
                             <>
-                              <button className="flex-1 px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200">
+                              <button 
+                                onClick={() => alert(`Configure ${integration.name} integration`)}
+                                className="flex-1 px-4 py-2 bg-dark-700 hover:bg-dark-600 text-white rounded-lg transition-colors duration-200"
+                              >
                                 Configure
                               </button>
-                              <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200">
+                              <button 
+                                onClick={() => alert(`Disconnect ${integration.name}?`)}
+                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-200"
+                              >
                                 Disconnect
                               </button>
                             </>
                           ) : integration.status === 'disconnected' ? (
-                            <button className="w-full px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200">
+                            <button 
+                              onClick={() => alert(`Reconnect ${integration.name} integration`)}
+                              className="w-full px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
+                            >
                               Reconnect
                             </button>
                           ) : (
-                            <button className="w-full px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200">
+                            <button 
+                              onClick={() => alert(`Connect ${integration.name} integration`)}
+                              className="w-full px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
+                            >
                               Connect
                             </button>
                           )}

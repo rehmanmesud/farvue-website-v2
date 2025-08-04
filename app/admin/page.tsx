@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { 
   FolderOpen, 
   Star, 
@@ -17,6 +18,8 @@ import {
 } from 'lucide-react';
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  
   const stats = [
     {
       title: 'Total Projects',
@@ -47,28 +50,28 @@ export default function AdminDashboard() {
       description: 'Add, edit, or delete project items',
       icon: FolderOpen,
       color: 'bg-primary-600',
-      action: () => console.log('Navigate to projects')
+      action: () => router.push('/admin/projects')
     },
     {
       title: 'View Client Communications',
       description: 'Monitor client interactions and messages',
       icon: MessageSquare,
       color: 'bg-secondary-600',
-      action: () => console.log('Navigate to communications')
+      action: () => router.push('/admin/clients')
     },
     {
       title: 'Manage Services',
       description: 'Update service offerings and pricing',
       icon: Briefcase,
       color: 'bg-accent-600',
-      action: () => console.log('Navigate to services')
+      action: () => router.push('/admin/services')
     },
     {
       title: 'View Analytics',
       description: 'See how projects perform with visitors',
       icon: Eye,
       color: 'bg-primary-700',
-      action: () => console.log('Navigate to analytics')
+      action: () => router.push('/admin/analytics')
     },
   ];
 
@@ -119,7 +122,10 @@ export default function AdminDashboard() {
           <h1 className="text-2xl font-bold text-white">Dashboard</h1>
           <p className="text-slate-400 mt-1">Welcome back! Here&apos;s what&apos;s happening with your projects.</p>
         </div>
-        <button className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200 shadow-lg shadow-accent-500/20">
+        <button 
+          onClick={() => router.push('/admin/projects')}
+          className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200 shadow-lg shadow-accent-500/20"
+        >
           <Plus className="w-4 h-4" />
           <span>New Project</span>
         </button>
@@ -173,7 +179,10 @@ export default function AdminDashboard() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-white">Recent Projects</h2>
-          <button className="text-accent-400 hover:text-accent-300 text-sm font-medium">
+          <button 
+            onClick={() => router.push('/admin/projects')}
+            className="text-accent-400 hover:text-accent-300 text-sm font-medium"
+          >
             View All Projects →
           </button>
         </div>

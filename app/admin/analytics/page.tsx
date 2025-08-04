@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   TrendingUp, 
   TrendingDown,
@@ -61,6 +62,7 @@ interface AnalyticsData {
 }
 
 export default function AnalyticsPage() {
+  const router = useRouter();
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(null);
   const [timeRange, setTimeRange] = useState('6months');
   const [isLoading, setIsLoading] = useState(false);
@@ -461,25 +463,37 @@ export default function AnalyticsPage() {
       <div className="bg-dark-900 border border-dark-700 rounded-xl p-6">
         <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <button className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50">
+          <button 
+            onClick={exportReport}
+            className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50"
+          >
             <Eye className="w-6 h-6 text-accent-500 mb-2" />
             <h4 className="text-white font-medium mb-1">View Detailed Reports</h4>
             <p className="text-gray-400 text-sm">Access comprehensive analytics</p>
           </button>
           
-          <button className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50">
+          <button 
+            onClick={() => router.push('/admin/settings')}
+            className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50"
+          >
             <Calendar className="w-6 h-6 text-primary-500 mb-2" />
             <h4 className="text-white font-medium mb-1">Schedule Review</h4>
             <p className="text-gray-400 text-sm">Plan monthly business review</p>
           </button>
           
-          <button className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50">
+          <button 
+            onClick={() => router.push('/admin/projects')}
+            className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50"
+          >
             <Target className="w-6 h-6 text-secondary-500 mb-2" />
             <h4 className="text-white font-medium mb-1">Set Goals</h4>
             <p className="text-gray-400 text-sm">Define targets for next period</p>
           </button>
           
-          <button className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50">
+          <button 
+            onClick={exportReport}
+            className="p-4 bg-dark-800 hover:bg-dark-700 rounded-lg text-left transition-colors duration-200 border border-dark-600 hover:border-accent-500/50"
+          >
             <Download className="w-6 h-6 text-primary-700 mb-2" />
             <h4 className="text-white font-medium mb-1">Export Data</h4>
             <p className="text-gray-400 text-sm">Download analytics reports</p>
