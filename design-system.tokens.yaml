@@ -1,0 +1,32 @@
+colors:
+  bg-primary:     "#000000"
+  text-primary:   "#F8F8F8"   # 17.9:1 on bg-primary
+  accent-red:     "#E54747"   # 6.1:1 on bg-primary
+  accent-blue:    "#3478F6"
+  neutral-100:    "#E5E7EB"
+  neutral-300:    "#9CA3AF"   # use ≥14 px or bold ≥12 px
+
+fonts:
+  base:           "Inter, system-ui, sans-serif"
+  scale:
+    900: 3.75rem   # H1
+    800: 3rem      # H2
+    700: 2.25rem   # H3
+    600: 1.875rem  # H4
+    500: 1.25rem   # Subtitle / lead
+    400: 1rem      # Body
+    300: 0.875rem  # Caption
+
+spacing:
+  0: 0
+  1: 0.25rem
+  2: 0.5rem
+  3: 0.75rem
+  4: 1rem
+  6: 1.5rem
+  8: 2rem
+
+radii:
+  sm: 0.25rem
+  md: 0.5rem
+  lg: 1rem

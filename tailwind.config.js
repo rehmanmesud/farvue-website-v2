@@ -8,7 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // FARVUE Media Brand Colors
+        // Design System Tokens
+        'bg-primary': '#000000',
+        'text-primary': '#F8F8F8',
+        'accent-red': '#E54747',
+        'accent-blue': '#3478F6',
+        'neutral-100': '#E5E7EB',
+        'neutral-300': '#9CA3AF',
+        
+        // FARVUE Media Brand Colors (maintained for compatibility)
         primary: {
           50: '#f0f4f8',
           100: '#d9e6f2',
@@ -63,14 +71,40 @@ module.exports = {
         display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
+        // Design System Font Scale
+        'caption': ['0.875rem', { lineHeight: '1.4' }],    // 300
+        'body': ['1rem', { lineHeight: '1.5' }],           // 400
+        'subtitle': ['1.25rem', { lineHeight: '1.4' }],    // 500
+        'h4': ['1.875rem', { lineHeight: '1.3' }],         // 600
+        'h3': ['2.25rem', { lineHeight: '1.2' }],          // 700
+        'h2': ['3rem', { lineHeight: '1.1' }],             // 800
+        'h1': ['3.75rem', { lineHeight: '1.1' }],          // 900
+        
+        // Existing sizes (maintained for compatibility)
         '5xl': ['3rem', { lineHeight: '1.1' }],
         '6xl': ['3.75rem', { lineHeight: '1.1' }],
         '7xl': ['4.5rem', { lineHeight: '1.1' }],
       },
       spacing: {
+        // Design System Spacing
+        '0': '0',
+        '1': '0.25rem',
+        '2': '0.5rem',
+        '3': '0.75rem',
+        '4': '1rem',
+        '6': '1.5rem',
+        '8': '2rem',
+        
+        // Existing spacing (maintained for compatibility)
         '18': '4.5rem',
         '88': '22rem',
         '128': '32rem',
+      },
+      borderRadius: {
+        // Design System Radii
+        'sm': '0.25rem',
+        'md': '0.5rem',
+        'lg': '1rem',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

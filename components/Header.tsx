@@ -47,68 +47,58 @@ const Header = () => {
       role='banner'
     >
       <nav
-        className='container-custom'
+        className='container-custom nav'
         role='navigation'
         aria-label='Main navigation'
       >
-        <div className='flex items-center justify-between h-16 lg:h-20'>
-          {/* Logo */}
-          <div className='flex-shrink-0'>
-            <a
-              href='#'
-              className='flex items-center space-x-2 text-xl lg:text-2xl font-bold text-white hover:text-secondary-400 transition-colors duration-200'
-              aria-label='FARVUE Media - Home'
-            >
-              <div className='w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center'>
-                <span className='text-white font-bold text-sm lg:text-base'>F</span>
-              </div>
-              <span className='hidden sm:block'>FARVUE Media</span>
-            </a>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className='hidden lg:block'>
-            <div className='ml-10 flex items-baseline space-x-8'>
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href)}
-                  className='text-white hover:text-secondary-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
-                  aria-label={`Navigate to ${item.name} section`}
-                >
-                  {item.name}
-                </button>
-              ))}
+        {/* Logo */}
+        <div className='flex-shrink-0'>
+          <a
+            href='#'
+            className='flex items-center space-x-2 text-xl lg:text-2xl font-bold text-white hover:text-secondary-400 transition-colors duration-200'
+            aria-label='FARVUE Media - Home'
+          >
+            <div className='w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center'>
+              <span className='text-white font-bold text-sm lg:text-base'>F</span>
             </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className='hidden lg:block'>
-            <button
-              onClick={handleBookCall}
-              className='btn-primary'
-              aria-label='Book a consultation call'
-            >
-              Book a call
-            </button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className='lg:hidden'>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='inline-flex items-center justify-center p-2 rounded-md text-white hover:text-secondary-400 hover:bg-dark-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-500 transition-colors duration-200'
-              aria-expanded={isMenuOpen}
-              aria-label={isMenuOpen ? 'Close main menu' : 'Open main menu'}
-            >
-              {isMenuOpen ? (
-                <X className='block h-6 w-6' aria-hidden='true' />
-              ) : (
-                <Menu className='block h-6 w-6' aria-hidden='true' />
-              )}
-            </button>
-          </div>
+            <span className='hidden sm:block'>FARVUE Media</span>
+          </a>
         </div>
+
+        {/* Desktop Navigation - nav__links class */}
+        <div className='nav__links'>
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => handleNavClick(item.href)}
+              className='text-white hover:text-secondary-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
+              aria-label={`Navigate to ${item.name} section`}
+            >
+              {item.name}
+            </button>
+          ))}
+          <button
+            onClick={handleBookCall}
+            className='btn-primary ml-4'
+            aria-label='Book a consultation call'
+          >
+            Book a call
+          </button>
+        </div>
+
+        {/* Mobile menu button - nav__toggle class */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className='nav__toggle'
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? 'Close main menu' : 'Open main menu'}
+        >
+          {isMenuOpen ? (
+            <X className='block h-6 w-6' aria-hidden='true' />
+          ) : (
+            <Menu className='block h-6 w-6' aria-hidden='true' />
+          )}
+        </button>
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (

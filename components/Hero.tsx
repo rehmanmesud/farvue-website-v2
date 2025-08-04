@@ -31,10 +31,10 @@ const Hero = () => {
   ];
 
   return (
-    <section 
+    <header 
       className='relative min-h-screen flex items-center justify-center bg-dark-900 overflow-hidden'
       role='banner'
-      aria-label='Hero section'
+      aria-label='Main hero section'
     >
       {/* Animated background gradient */}
       <div className='absolute inset-0 bg-gradient-to-br from-dark-900 via-primary-900/20 to-secondary-900/20'>
@@ -58,9 +58,11 @@ const Hero = () => {
                 <img
                   key={index}
                   src={avatar}
-                  alt={`Client ${index + 1}`}
+                  alt=''
+                  role='presentation'
                   className='w-10 h-10 rounded-full border-2 border-dark-900 ring-2 ring-secondary-500/30'
                   loading='eager'
+                  decoding='async'
                 />
               ))}
             </div>
@@ -74,31 +76,30 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Main headline */}
-          <h1 className='heading-xl mb-6 max-w-5xl mx-auto'>
+          {/* Main headline - 9 words max */}
+          <h1 className='text-h1 font-bold leading-tight mb-6 max-w-5xl mx-auto'>
             Ready to{' '}
-            <span className='text-accent relative'>
+            <span className='text-accent-red u-underline'>
               scale
-              <div className='absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-accent-500 to-accent-600 rounded-full'></div>
             </span>{' '}
             your brand with editing?
           </h1>
 
-          {/* Subtitle */}
-          <p className='text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed'>
-            Working with personal brands to make them attract their dream customers 
-            through designing and editing.
+          {/* Lead paragraph with secondary copy */}
+          <p className='lead mb-10 max-w-3xl mx-auto leading-relaxed'>
+            We help creators attract dream customers through design & editing.
           </p>
 
           {/* CTA Buttons */}
           <div className='flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6'>
-            <button
+            <a
+              href="#booking"
               onClick={handleBookCall}
-              className='btn-primary text-lg px-8 py-4 shadow-glow'
-              aria-label='Book a consultation call to get started'
+              className='btn btn--primary text-lg px-8 py-4 shadow-glow'
+              aria-label='Book a discovery call'
             >
               Book a call
-            </button>
+            </a>
             <button
               onClick={handleLearnMore}
               className='btn-outline text-lg px-8 py-4 group'
@@ -128,7 +129,7 @@ const Hero = () => {
           <div className='w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce'></div>
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

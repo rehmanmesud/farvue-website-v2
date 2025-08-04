@@ -4,6 +4,17 @@
 @tailwind utilities;
 
 @layer base {
+  /* Design System Root Variables */
+  :root {
+    --accent-blue: #3478F6;
+    --accent-red: #E54747;
+    --spacing-6: 1.5rem;
+    --bg-primary: #000000;
+    --text-primary: #F8F8F8;
+    --neutral-100: #E5E7EB;
+    --neutral-300: #9CA3AF;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -13,7 +24,13 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
-  /* Focus styles for accessibility */
+  /* Enhanced Focus Ring for Accessibility */
+  :focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+  }
+
+  /* Legacy focus fallback */
   *:focus {
     @apply outline-none ring-2 ring-secondary-500 ring-offset-2 ring-offset-dark-900;
   }
@@ -26,6 +43,50 @@
 
   .skip-link:focus {
     @apply top-6;
+  }
+
+  /* Comparison table accessibility */
+  .table__row--bad::before {
+    content: "✖";
+    color: #DC2626;
+    margin-right: 0.5rem;
+  }
+
+  .table__row--good::before {
+    content: "✔";
+    color: #16A34A;
+    margin-right: 0.5rem;
+  }
+
+  /* Decorative images should not trap focus */
+  img[role="presentation"],
+  img[aria-hidden="true"] {
+    pointer-events: none;
+  }
+
+  /* Typography hierarchy */
+  h1 {
+    @apply text-h1 font-bold leading-tight;
+    word-break: break-word;
+  }
+
+  h2 {
+    @apply text-h2 font-bold leading-tight;
+    word-break: break-word;
+  }
+
+  h3 {
+    @apply text-h3 font-semibold leading-tight;
+    word-break: break-word;
+  }
+
+  h4 {
+    @apply text-h4 font-semibold leading-tight;
+    word-break: break-word;
+  }
+
+  .lead {
+    @apply text-subtitle text-neutral-300;
   }
 }
 
@@ -114,6 +175,60 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-secondary-600;
   }
+
+  /* Responsive Navigation - Mobile First */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: block;
+    cursor: pointer;
+    border: 0;
+    background: none;
+    color: white;
+    padding: 0.5rem;
+  }
+
+  /* ≥640 px */
+  @media (min-width: 40rem) {
+    .nav__links {
+      display: flex;
+      gap: var(--spacing-6);
+    }
+    
+    .nav__toggle {
+      display: none;
+    }
+  }
+
+  /* Reusable Grid System */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--spacing-6);
+  }
+
+  .grid--pricing {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+
+  .grid--services {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+
+  /* Utility Classes */
+  .u-underline {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-red);
+    text-underline-offset: 0.2em;
+  }
 }
 
 @layer utilities {
@@ -137,7 +252,7 @@
     }
   }
 
-  /* Reduced motion support */
+  /* Honor reduced-motion preference */
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;

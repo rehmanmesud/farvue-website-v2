@@ -81,11 +81,11 @@ const Pricing = () => {
           <p className='text-secondary-400 font-medium mb-4 tracking-wider uppercase text-sm'>
             Pricing
           </p>
-          <h2 className='heading-lg mb-6'>
+          <h2 className='text-h2 font-bold leading-tight mb-6'>
             Simplest{' '}
-            <span className='text-accent italic'>Pricing</span>
+            <span className='text-accent-red u-underline'>Pricing</span>
           </h2>
-          <p className='text-gray-300 text-lg max-w-3xl mx-auto'>
+          <p className='lead max-w-3xl mx-auto'>
             Pricing that makes your life easier to build assets and create content
           </p>
         </div>
@@ -93,7 +93,7 @@ const Pricing = () => {
         {/* Pricing Cards */}
         <div 
           ref={ref}
-          className='grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto'
+          className='grid grid--pricing max-w-7xl mx-auto'
         >
           {pricingPlans.map((plan, index) => (
             <div
