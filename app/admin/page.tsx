@@ -104,7 +104,7 @@ export default function AdminDashboard() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'In Progress': return 'bg-blue-100 text-blue-800';
+              case 'In Progress': return 'bg-accent-100 text-accent-800';
       case 'Review': return 'bg-yellow-100 text-yellow-800';
       case 'Completed': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold text-white">Recent Projects</h2>
-          <button className="text-blue-400 hover:text-blue-300 text-sm font-medium">
+          <button className="text-accent-400 hover:text-accent-300 text-sm font-medium">
             View All Projects →
           </button>
         </div>
@@ -210,7 +210,7 @@ export default function AdminDashboard() {
                       <div className="flex items-center space-x-2">
                         <div className="flex-1 bg-slate-700 rounded-full h-2">
                           <div 
-                            className="bg-blue-500 h-2 rounded-full" 
+                            className="bg-accent-500 h-2 rounded-full" 
                             style={{ width: `${project.progress}%` }}
                           ></div>
                         </div>

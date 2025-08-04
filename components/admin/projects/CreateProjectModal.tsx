@@ -229,14 +229,14 @@ export default function CreateProjectModal({
               <div key={step} className="flex items-center flex-1">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                   step <= currentStep
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-accent-600 text-white'
                     : 'bg-slate-700 text-slate-400'
                 }`}>
                   {step < currentStep ? <Check className="w-4 h-4" /> : step}
                 </div>
                 {step < 3 && (
                   <div className={`flex-1 h-1 mx-4 rounded ${
-                    step < currentStep ? 'bg-blue-600' : 'bg-slate-700'
+                    step < currentStep ? 'bg-accent-600' : 'bg-slate-700'
                   }`} />
                 )}
               </div>
@@ -262,7 +262,7 @@ export default function CreateProjectModal({
                     placeholder="Enter project title..."
                     className={`w-full px-4 py-3 bg-slate-800 border ${
                       errors.title ? 'border-red-500' : 'border-slate-600'
-                    } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500`}
                   />
                   {errors.title && <p className="text-red-400 text-sm mt-1">{errors.title}</p>}
                 </div>
@@ -279,7 +279,7 @@ export default function CreateProjectModal({
                     rows={4}
                     className={`w-full px-4 py-3 bg-slate-800 border ${
                       errors.description ? 'border-red-500' : 'border-slate-600'
-                    } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none`}
+                    } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none`}
                   />
                   {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description}</p>}
                 </div>
@@ -297,7 +297,7 @@ export default function CreateProjectModal({
                         onClick={() => handleClientSelect(client)}
                         className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${
                           selectedClient?.id === client.id
-                            ? 'border-blue-500 bg-blue-500/10'
+                            ? 'border-accent-500 bg-accent-500/10'
                             : 'border-slate-600 bg-slate-800 hover:border-slate-500'
                         }`}
                       >
@@ -327,7 +327,7 @@ export default function CreateProjectModal({
                     <select
                       value={formData.serviceType || 'video-editing'}
                       onChange={(e) => handleInputChange('serviceType', e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                     >
                       <option value="video-editing">Video Editing</option>
                       <option value="short-form">Short Form Content</option>
@@ -344,7 +344,7 @@ export default function CreateProjectModal({
                     <select
                       value={formData.priority || 'medium'}
                       onChange={(e) => handleInputChange('priority', e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                     >
                       <option value="low">Low</option>
                       <option value="medium">Medium</option>
@@ -372,7 +372,7 @@ export default function CreateProjectModal({
                         onClick={() => handleTeamMemberToggle(member)}
                         className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${
                           selectedTeamMembers.some(m => m.id === member.id)
-                            ? 'border-blue-500 bg-blue-500/10'
+                            ? 'border-accent-500 bg-accent-500/10'
                             : 'border-slate-600 bg-slate-800 hover:border-slate-500'
                         }`}
                       >
@@ -389,7 +389,7 @@ export default function CreateProjectModal({
                             </div>
                           </div>
                           {selectedTeamMembers.some(m => m.id === member.id) && (
-                            <Check className="w-5 h-5 text-blue-400" />
+                            <Check className="w-5 h-5 text-accent-400" />
                           )}
                         </div>
                         <div className="mt-2">
@@ -425,7 +425,7 @@ export default function CreateProjectModal({
                       type="date"
                       value={formData.startDate || ''}
                       onChange={(e) => handleInputChange('startDate', e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                     />
                   </div>
 
@@ -439,7 +439,7 @@ export default function CreateProjectModal({
                       onChange={(e) => handleInputChange('dueDate', e.target.value)}
                       className={`w-full px-4 py-3 bg-slate-800 border ${
                         errors.dueDate ? 'border-red-500' : 'border-slate-600'
-                      } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                      } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500`}
                     />
                     {errors.dueDate && <p className="text-red-400 text-sm mt-1">{errors.dueDate}</p>}
                   </div>
@@ -460,7 +460,7 @@ export default function CreateProjectModal({
                         placeholder="0"
                         className={`w-full pl-10 pr-4 py-3 bg-slate-800 border ${
                           errors.budget ? 'border-red-500' : 'border-slate-600'
-                        } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500`}
                       />
                     </div>
                     {errors.budget && <p className="text-red-400 text-sm mt-1">{errors.budget}</p>}
@@ -479,7 +479,7 @@ export default function CreateProjectModal({
                         placeholder="0"
                         className={`w-full pl-10 pr-4 py-3 bg-slate-800 border ${
                           errors.estimatedHours ? 'border-red-500' : 'border-slate-600'
-                        } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        } rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500`}
                       />
                     </div>
                     {errors.estimatedHours && <p className="text-red-400 text-sm mt-1">{errors.estimatedHours}</p>}
@@ -500,13 +500,13 @@ export default function CreateProjectModal({
                     {formData.tags?.map((tag) => (
                       <span
                         key={tag}
-                        className="flex items-center gap-2 px-3 py-1 bg-blue-600 text-white text-sm rounded-full"
+                        className="flex items-center gap-2 px-3 py-1 bg-accent-600 text-white text-sm rounded-full"
                       >
                         {tag}
                         <button
                           type="button"
                           onClick={() => removeTag(tag)}
-                          className="hover:bg-blue-700 rounded-full p-1 transition-colors duration-200"
+                          className="hover:bg-accent-700 rounded-full p-1 transition-colors duration-200"
                         >
                           <X className="w-3 h-3" />
                         </button>
@@ -520,12 +520,12 @@ export default function CreateProjectModal({
                       onChange={(e) => setNewTag(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
                       placeholder="Add a tag..."
-                      className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500"
                     />
                     <button
                       type="button"
                       onClick={addTag}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                      className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -542,7 +542,7 @@ export default function CreateProjectModal({
                     onChange={(e) => handleInputChange('clientNotes', e.target.value)}
                     placeholder="Any specific client requirements or feedback..."
                     rows={3}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none"
                   />
                 </div>
 
@@ -556,7 +556,7 @@ export default function CreateProjectModal({
                     onChange={(e) => handleInputChange('internalNotes', e.target.value)}
                     placeholder="Internal team notes, technical requirements, etc..."
                     rows={3}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none"
                   />
                 </div>
 
@@ -569,7 +569,7 @@ export default function CreateProjectModal({
                     <select
                       value={formData.status || 'not-started'}
                       onChange={(e) => handleInputChange('status', e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                     >
                       <option value="not-started">Not Started</option>
                       <option value="in-progress">In Progress</option>
@@ -612,14 +612,14 @@ export default function CreateProjectModal({
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                  className="px-6 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
                 >
                   Next Step
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                  className="px-6 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
                 >
                   {editProject ? 'Update Project' : 'Create Project'}
                 </button>

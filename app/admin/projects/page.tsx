@@ -282,7 +282,7 @@ export default function ProjectsPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-1 bg-slate-800 border border-slate-600 rounded text-sm text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
             >
               <option value="dueDate">Due Date</option>
               <option value="priority">Priority</option>
@@ -326,7 +326,7 @@ export default function ProjectsPage() {
               onClick={() => setViewMode('grid')}
               className={`p-2 transition-colors duration-200 ${
                 viewMode === 'grid'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-accent-600 text-white'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -336,7 +336,7 @@ export default function ProjectsPage() {
               onClick={() => setViewMode('list')}
               className={`p-2 transition-colors duration-200 ${
                 viewMode === 'list'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-accent-600 text-white'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -391,7 +391,7 @@ export default function ProjectsPage() {
             )}
             <button
               onClick={() => setShowCreateModal(true)}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+              className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
             >
               Create Project
             </button>

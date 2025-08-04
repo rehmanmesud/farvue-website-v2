@@ -73,7 +73,7 @@ export default function ProjectCard({
       case 'completed':
         return <CheckCircle className="w-4 h-4 text-green-500" />;
       case 'in-progress':
-        return <PlayCircle className="w-4 h-4 text-blue-500" />;
+        return <PlayCircle className="w-4 h-4 text-accent-500" />;
       case 'on-hold':
         return <PauseCircle className="w-4 h-4 text-yellow-500" />;
       case 'cancelled':
@@ -99,7 +99,7 @@ export default function ProjectCard({
             <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
               project.priority === 'urgent' ? 'bg-red-500' :
               project.priority === 'high' ? 'bg-orange-500' :
-              project.priority === 'medium' ? 'bg-blue-500' : 'bg-green-500'
+              project.priority === 'medium' ? 'bg-accent-500' : 'bg-green-500'
             }`}>
               {getServiceTypeIcon()}
             </div>
@@ -161,7 +161,7 @@ export default function ProjectCard({
         </div>
 
         {/* Project Title */}
-        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors duration-200 line-clamp-2">
+        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-accent-400 transition-colors duration-200 line-clamp-2">
           {project.title}
         </h3>
 
@@ -194,7 +194,7 @@ export default function ProjectCard({
           <div 
             className={`h-2 rounded-full transition-all duration-500 ${
               progress === 100 ? 'bg-green-500' :
-              progress >= 75 ? 'bg-blue-500' :
+              progress >= 75 ? 'bg-accent-500' :
               progress >= 50 ? 'bg-yellow-500' : 'bg-slate-500'
             }`}
             style={{ width: `${progress}%` }}
@@ -379,7 +379,7 @@ export default function ProjectCard({
             </button>
             <button
               onClick={() => onViewDetails(project)}
-              className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition-colors duration-200"
+              className="px-3 py-1 bg-accent-600 hover:bg-accent-700 text-white text-xs rounded transition-colors duration-200"
             >
               View Details
             </button>

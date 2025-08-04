@@ -61,7 +61,7 @@ export default function ProjectsHeader({
               <p className="text-slate-400 text-sm font-medium">Total Projects</p>
               <p className="text-2xl font-bold text-white">{mockProjectStats.totalProjects}</p>
             </div>
-            <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center">
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function ProjectsHeader({
           
           <button
             onClick={onCreateProject}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
           >
             <Plus className="w-4 h-4" />
             <span>New Project</span>
@@ -146,7 +146,7 @@ export default function ProjectsHeader({
             placeholder="Search projects, clients, or team members..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent"
           />
         </div>
 
@@ -156,14 +156,14 @@ export default function ProjectsHeader({
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center gap-2 px-4 py-3 rounded-lg border transition-colors duration-200 ${
               showFilters || activeFiltersCount > 0
-                ? 'bg-blue-600 border-blue-500 text-white'
+                ? 'bg-accent-600 border-accent-500 text-white'
                 : 'bg-slate-900 border-slate-700 text-slate-300 hover:bg-slate-800'
             }`}
           >
             <Filter className="w-4 h-4" />
             <span>Filters</span>
             {activeFiltersCount > 0 && (
-              <span className="bg-white text-blue-600 text-xs font-medium px-2 py-1 rounded-full">
+              <span className="bg-white text-accent-600 text-xs font-medium px-2 py-1 rounded-full">
                 {activeFiltersCount}
               </span>
             )}
@@ -182,7 +182,7 @@ export default function ProjectsHeader({
               </label>
               <select
                 onChange={(e) => handleFilterChange('status', e.target.value ? [e.target.value] : undefined)}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
                 <option value="">All Statuses</option>
                 <option value="not-started">Not Started</option>
@@ -202,7 +202,7 @@ export default function ProjectsHeader({
               </label>
               <select
                 onChange={(e) => handleFilterChange('serviceType', e.target.value ? [e.target.value] : undefined)}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
                 <option value="">All Services</option>
                 <option value="video-editing">Video Editing</option>
@@ -220,7 +220,7 @@ export default function ProjectsHeader({
               </label>
               <select
                 onChange={(e) => handleFilterChange('priority', e.target.value ? [e.target.value] : undefined)}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
                 <option value="">All Priorities</option>
                 <option value="low">Low</option>
@@ -261,7 +261,7 @@ export default function ProjectsHeader({
                     handleFilterChange('dateRange', undefined);
                   }
                 }}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
                 <option value="">All Dates</option>
                 <option value="week">Due This Week</option>

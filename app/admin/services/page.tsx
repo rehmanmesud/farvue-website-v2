@@ -111,7 +111,7 @@ export default function ServicesManagementPage() {
               <p className="text-slate-400 text-sm font-medium">Total Services</p>
               <p className="text-2xl font-bold text-white">{stats.totalServices}</p>
             </div>
-            <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center">
               <Settings className="w-6 h-6 text-white" />
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function ServicesManagementPage() {
           
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
           >
             <Plus className="w-4 h-4" />
             <span>Add Service</span>
@@ -202,7 +202,7 @@ export default function ServicesManagementPage() {
             placeholder="Search services..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent-500"
           />
         </div>
         
@@ -210,7 +210,7 @@ export default function ServicesManagementPage() {
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
           >
             <option value="all">All Categories</option>
             <option value="editing">Video Editing</option>
@@ -222,7 +222,7 @@ export default function ServicesManagementPage() {
           <select
             value={filterVisibility}
             onChange={(e) => setFilterVisibility(e.target.value)}
-            className="px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
           >
             <option value="all">All Services</option>
             <option value="visible">Live Only</option>
@@ -261,7 +261,7 @@ export default function ServicesManagementPage() {
           </p>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+            className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
           >
             Create Service
           </button>
@@ -317,7 +317,7 @@ function ServiceCard({
 }) {
   const getCategoryColor = (category: string) => {
     const colors = {
-      editing: 'bg-blue-500',
+      editing: 'bg-accent-500',
       design: 'bg-purple-500',
       development: 'bg-green-500',
       automation: 'bg-orange-500'
@@ -397,8 +397,8 @@ function ServiceCard({
             <p className="text-xs text-slate-400">Starter</p>
             <p className="font-semibold text-white">${service.pricing.starter}</p>
           </div>
-          <div className="text-center p-2 bg-blue-600 rounded">
-            <p className="text-xs text-blue-100">Pro</p>
+          <div className="text-center p-2 bg-accent-600 rounded">
+            <p className="text-xs text-accent-100">Pro</p>
             <p className="font-semibold text-white">${service.pricing.pro}</p>
           </div>
           <div className="text-center p-2 bg-slate-800 rounded">
@@ -435,7 +435,7 @@ function ServiceCard({
           <div className="flex space-x-2">
             <button
               onClick={onEdit}
-              className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors duration-200"
+              className="p-2 bg-accent-600 hover:bg-accent-700 text-white rounded transition-colors duration-200"
               title="Edit Service"
             >
               <Edit className="w-4 h-4" />
@@ -552,7 +552,7 @@ function ServiceModal({
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                 required
               />
             </div>
@@ -562,7 +562,7 @@ function ServiceModal({
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
                 <option value="editing">Video Editing</option>
                 <option value="design">Design</option>
@@ -579,7 +579,7 @@ function ServiceModal({
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={3}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none"
               required
             />
           </div>
@@ -597,7 +597,7 @@ function ServiceModal({
                     ...formData, 
                     pricing: { ...formData.pricing, starter: parseInt(e.target.value) || 0 }
                   })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                 />
               </div>
               <div>
@@ -609,7 +609,7 @@ function ServiceModal({
                     ...formData, 
                     pricing: { ...formData.pricing, pro: parseInt(e.target.value) || 0 }
                   })}
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                 />
               </div>
               <div>
@@ -622,7 +622,7 @@ function ServiceModal({
                     pricing: { ...formData.pricing, custom: parseInt(e.target.value) || undefined }
                   })}
                   placeholder="Optional"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                 />
               </div>
             </div>
@@ -639,7 +639,7 @@ function ServiceModal({
                     value={feature}
                     onChange={(e) => handleFeatureChange(index, e.target.value)}
                     placeholder={`Feature ${index + 1}`}
-                    className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                   />
                   <button
                     type="button"
@@ -653,7 +653,7 @@ function ServiceModal({
               <button
                 type="button"
                 onClick={addFeature}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
               >
                 Add Feature
               </button>
@@ -671,7 +671,7 @@ function ServiceModal({
                     value={subService}
                     onChange={(e) => handleSubServiceChange(index, e.target.value)}
                     placeholder={`Sub Service ${index + 1}`}
-                    className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
                   />
                   <button
                     type="button"
@@ -685,7 +685,7 @@ function ServiceModal({
               <button
                 type="button"
                 onClick={addSubService}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+                className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
               >
                 Add Sub Service
               </button>
@@ -702,7 +702,7 @@ function ServiceModal({
                 max="100"
                 value={formData.demand}
                 onChange={(e) => setFormData({ ...formData, demand: parseInt(e.target.value) || 0 })}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               />
             </div>
             
@@ -714,7 +714,7 @@ function ServiceModal({
                 max="100"
                 value={formData.completionRate}
                 onChange={(e) => setFormData({ ...formData, completionRate: parseInt(e.target.value) || 0 })}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               />
             </div>
             
@@ -727,7 +727,7 @@ function ServiceModal({
                 step="0.1"
                 value={formData.averageRating}
                 onChange={(e) => setFormData({ ...formData, averageRating: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
               />
             </div>
             
@@ -737,7 +737,7 @@ function ServiceModal({
                   type="checkbox"
                   checked={formData.isVisible}
                   onChange={(e) => setFormData({ ...formData, isVisible: e.target.checked })}
-                  className="rounded bg-slate-800 border-slate-600 text-blue-600 focus:ring-blue-500"
+                  className="rounded bg-slate-800 border-slate-600 text-accent-600 focus:ring-accent-500"
                 />
                 <span>Visible on website</span>
               </label>
@@ -755,7 +755,7 @@ function ServiceModal({
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 flex items-center gap-2"
+              className="px-6 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200 flex items-center gap-2"
             >
               <Save className="w-4 h-4" />
               {editService ? 'Update Service' : 'Create Service'}
@@ -785,7 +785,7 @@ function ServiceDetailsModal({
           <div className="flex items-center space-x-3">
             <button
               onClick={onEdit}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200"
+              className="px-4 py-2 bg-accent-600 hover:bg-accent-700 text-white rounded-lg transition-colors duration-200"
             >
               Edit Service
             </button>
@@ -836,7 +836,7 @@ function ServiceDetailsModal({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {service.subServices.map((subService, index) => (
                   <div key={index} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <div className="w-2 h-2 bg-accent-400 rounded-full"></div>
                     <span className="text-slate-300">{subService}</span>
                   </div>
                 ))}
@@ -853,8 +853,8 @@ function ServiceDetailsModal({
                   <span className="text-slate-300">Starter</span>
                   <span className="font-semibold text-white">${service.pricing.starter}</span>
                 </div>
-                <div className="flex justify-between p-3 bg-blue-600 rounded-lg">
-                  <span className="text-blue-100">Pro</span>
+                <div className="flex justify-between p-3 bg-accent-600 rounded-lg">
+                  <span className="text-accent-100">Pro</span>
                   <span className="font-semibold text-white">${service.pricing.pro}</span>
                 </div>
                 {service.pricing.custom && (

@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
+import { getStoredUser, logout, type AdminUser } from '@/lib/auth';
 
 export default function AdminHeader() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [user, setUser] = useState<AdminUser | null>(null);
+
+  useEffect(() => {
+    setUser(getStoredUser());
+  }, []);
 
   const tabs = [
     { id: 'dashboard', label: 'Dashboard' },
@@ -51,7 +57,8 @@ export default function AdminHeader() {
                 <span className="text-white font-semibold text-sm">R</span>
               </div>
               <div className="text-left">
-                <p className="text-sm font-medium text-white">admin@farvue.media</p>
+                <p className="text-sm font-medium text-white">{user?.username || 'Admin'}</p>
+                <p className="text-xs text-gray-400">{user?.role || 'Admin'}</p>
               </div>
               <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -69,7 +76,10 @@ export default function AdminHeader() {
                     <span>Settings</span>
                   </button>
                   <div className="border-t border-dark-700 my-2"></div>
-                  <button className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-accent-400 hover:bg-dark-700">
+                  <button 
+                    onClick={logout}
+                    className="w-full flex items-center space-x-3 px-4 py-2 text-sm text-accent-400 hover:bg-dark-700"
+                  >
                     <LogOut className="w-4 h-4" />
                     <span>Logout</span>
                   </button>

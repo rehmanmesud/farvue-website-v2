@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getStoredUser, type AdminUser } from '@/lib/auth';
 import { 
   BarChart3, 
   FolderOpen, 
@@ -17,6 +18,11 @@ import {
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const [user, setUser] = useState<AdminUser | null>(null);
+
+  useEffect(() => {
+    setUser(getStoredUser());
+  }, []);
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home, href: '/admin' },
@@ -75,8 +81,8 @@ export default function AdminSidebar() {
             <span className="text-white font-semibold text-sm">R</span>
           </div>
           <div className="flex-1">
-            <p className="text-sm font-medium text-white">Rehmanmesud</p>
-            <p className="text-xs text-gray-400">Admin</p>
+            <p className="text-sm font-medium text-white">{user?.username || 'Admin'}</p>
+            <p className="text-xs text-gray-400">{user?.role || 'Admin'}</p>
           </div>
         </div>
       </div>
