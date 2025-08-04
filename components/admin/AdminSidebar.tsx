@@ -1,0 +1,85 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { 
+  BarChart3, 
+  FolderOpen, 
+  Users, 
+  Settings, 
+  Home,
+  Video,
+  Palette,
+  Bot,
+  Code
+} from 'lucide-react';
+
+export default function AdminSidebar() {
+  const pathname = usePathname();
+
+  const menuItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: Home, href: '/admin' },
+    { id: 'projects', label: 'Projects', icon: FolderOpen, href: '/admin/projects' },
+    { id: 'services', label: 'Services', icon: Video, href: '/admin/services' },
+    { id: 'clients', label: 'Clients', icon: Users, href: '/admin/clients' },
+    { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/admin/analytics' },
+    { id: 'settings', label: 'Settings', icon: Settings, href: '/admin/settings' },
+  ];
+
+  return (
+    <div className="w-64 bg-slate-900 border-r border-slate-700 flex flex-col">
+      {/* Logo/Branding */}
+      <div className="p-6 border-b border-slate-700">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">F</span>
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-white">FARVUE</h1>
+            <p className="text-sm text-slate-400">Media Admin</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Menu */}
+      <nav className="flex-1 p-4">
+        <ul className="space-y-2">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href || (item.href === '/admin' && pathname === '/admin');
+            
+            return (
+              <li key={item.id}>
+                <Link
+                  href={item.href}
+                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      {/* User Profile Section */}
+      <div className="p-4 border-t border-slate-700">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <span className="text-white font-semibold text-sm">R</span>
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-white">Rehmanmesud</p>
+            <p className="text-xs text-slate-400">Admin</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
