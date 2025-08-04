@@ -13,7 +13,7 @@ export default function AdminLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-slate-900 text-white font-sans">
+      <body className="bg-dark-900 text-white font-sans">
         <div className="flex h-screen overflow-hidden">
           {/* Sidebar */}
           <AdminSidebar />
@@ -24,7 +24,7 @@ export default function AdminLayout({
             <AdminHeader />
             
             {/* Page Content */}
-            <main className="flex-1 overflow-auto bg-slate-800 p-6">
+            <main className="flex-1 overflow-auto bg-dark-800 p-6">
               {children}
             </main>
           </div>

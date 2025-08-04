@@ -28,16 +28,16 @@ export default function AdminSidebar() {
   ];
 
   return (
-    <div className="w-64 bg-slate-900 border-r border-slate-700 flex flex-col">
+    <div className="w-64 bg-dark-900 border-r border-dark-700 flex flex-col">
       {/* Logo/Branding */}
-      <div className="p-6 border-b border-slate-700">
+      <div className="p-6 border-b border-dark-700">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">F</span>
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">FARVUE</h1>
-            <p className="text-sm text-slate-400">Media Admin</p>
+            <p className="text-sm text-gray-400">Media Admin</p>
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@ export default function AdminSidebar() {
                   href={item.href}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/20'
+                      : 'text-gray-300 hover:bg-dark-800 hover:text-white hover:bg-gradient-to-r hover:from-primary-900/20 hover:to-accent-900/20'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -69,14 +69,14 @@ export default function AdminSidebar() {
       </nav>
 
       {/* User Profile Section */}
-      <div className="p-4 border-t border-slate-700">
+      <div className="p-4 border-t border-dark-700">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center">
             <span className="text-white font-semibold text-sm">R</span>
           </div>
           <div className="flex-1">
             <p className="text-sm font-medium text-white">Rehmanmesud</p>
-            <p className="text-xs text-slate-400">Admin</p>
+            <p className="text-xs text-gray-400">Admin</p>
           </div>
         </div>
       </div>

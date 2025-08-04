@@ -22,21 +22,21 @@ export default function AdminDashboard() {
       title: 'Total Projects',
       value: '47',
       icon: FolderOpen,
-      color: 'bg-blue-500',
+      color: 'bg-primary-500',
       trend: '+12% from last month'
     },
     {
       title: 'Active Clients',
       value: '23',
       icon: Users,
-      color: 'bg-green-500',
+      color: 'bg-secondary-500',
       trend: '+8% from last month'
     },
     {
       title: 'This Month Revenue',
       value: '$28,450',
       icon: TrendingUp,
-      color: 'bg-purple-500',
+      color: 'bg-accent-500',
       trend: '+23% from last month'
     },
   ];
@@ -46,28 +46,28 @@ export default function AdminDashboard() {
       title: 'Manage Projects',
       description: 'Add, edit, or delete project items',
       icon: FolderOpen,
-      color: 'bg-blue-600',
+      color: 'bg-primary-600',
       action: () => console.log('Navigate to projects')
     },
     {
       title: 'View Client Communications',
       description: 'Monitor client interactions and messages',
       icon: MessageSquare,
-      color: 'bg-green-600',
+      color: 'bg-secondary-600',
       action: () => console.log('Navigate to communications')
     },
     {
       title: 'Manage Services',
       description: 'Update service offerings and pricing',
       icon: Briefcase,
-      color: 'bg-purple-600',
+      color: 'bg-accent-600',
       action: () => console.log('Navigate to services')
     },
     {
       title: 'View Analytics',
       description: 'See how projects perform with visitors',
       icon: Eye,
-      color: 'bg-orange-600',
+      color: 'bg-primary-700',
       action: () => console.log('Navigate to analytics')
     },
   ];
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
           <h1 className="text-2xl font-bold text-white">Dashboard</h1>
           <p className="text-slate-400 mt-1">Welcome back! Here&apos;s what&apos;s happening with your projects.</p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200">
+        <button className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200 shadow-lg shadow-accent-500/20">
           <Plus className="w-4 h-4" />
           <span>New Project</span>
         </button>
@@ -130,14 +130,14 @@ export default function AdminDashboard() {
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className="bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-slate-600 transition-colors duration-200">
+            <div key={index} className="bg-dark-900 border border-dark-700 rounded-xl p-6 hover:border-accent-500/50 transition-colors duration-200">
               <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 ${stat.color} rounded-lg flex items-center justify-center`}>
                   <Icon className="w-6 h-6 text-white" />
                 </div>
               </div>
               <div>
-                <p className="text-slate-400 text-sm font-medium">{stat.title}</p>
+                <p className="text-gray-400 text-sm font-medium">{stat.title}</p>
                 <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
                 <p className="text-green-400 text-xs mt-2">{stat.trend}</p>
               </div>
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
               <button
                 key={index}
                 onClick={action.action}
-                className="bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-slate-600 hover:bg-slate-800 transition-all duration-200 text-left group"
+                className="bg-dark-900 border border-dark-700 rounded-xl p-6 hover:border-accent-500/50 hover:bg-dark-800 transition-all duration-200 text-left group"
               >
                 <div className={`w-12 h-12 ${action.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-200`}>
                   <Icon className="w-6 h-6 text-white" />
