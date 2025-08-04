@@ -25,7 +25,10 @@ import {
   X,
   AlertTriangle,
   Info,
-  Zap
+  Zap,
+  Calendar,
+  DollarSign,
+  BarChart3
 } from 'lucide-react';
 
 interface UserRole {
