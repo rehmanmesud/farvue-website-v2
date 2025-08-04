@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Video, Palette, Bot, Code, ArrowRight, Settings } from 'lucide-react';
-import { getVisibleServices } from '@/lib/data/cms-services';
+import { Video, Palette, Bot, Code, ArrowRight, Settings, RefreshCw } from 'lucide-react';
+import { getVisibleServices, refreshServicesData } from '@/lib/data/cms-services';
 
 const Services = () => {
   const { ref, inView } = useInView({
@@ -13,17 +13,45 @@ const Services = () => {
 
   // State for CMS-managed services
   const [cmsServices, setCmsServices] = useState(getVisibleServices());
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  // Refresh services data from CMS (simulates real-time updates)
+  // Manual refresh function
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      refreshServicesData(); // Force refresh from localStorage
+      setCmsServices(getVisibleServices());
+      console.log('✅ Services refreshed from admin changes');
+    } catch (error) {
+      console.error('❌ Failed to refresh services:', error);
+    } finally {
+      setTimeout(() => setIsRefreshing(false), 500); // Visual feedback
+    }
+  };
+
+  // Refresh services data from CMS (real-time updates)
   useEffect(() => {
     const refreshServices = () => {
+      refreshServicesData(); // Force refresh from localStorage
       setCmsServices(getVisibleServices());
     };
     
-    // Refresh every 10 seconds to pick up admin changes
-    const interval = setInterval(refreshServices, 10000);
+    // Refresh every 3 seconds to pick up admin changes quickly
+    const interval = setInterval(refreshServices, 3000);
     
-    return () => clearInterval(interval);
+    // Also refresh when the page becomes visible (tab switching)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        refreshServices();
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   // Icon mapping for categories
@@ -93,10 +121,25 @@ const Services = () => {
             Your {services.length} Core Service{services.length !== 1 ? 's' : ''}{' '}
             <span className='text-accent italic'>+ Subsections</span>
           </h2>
-          <p className='text-gray-300 text-lg max-w-3xl mx-auto'>
+          <p className='text-gray-300 text-lg max-w-3xl mx-auto mb-6'>
             From high-impact video editing to AI automation and custom web development - 
             we&apos;ve got everything you need to scale your business.
           </p>
+          
+          {/* CMS Refresh Button (for testing admin changes) */}
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+              isRefreshing 
+                ? 'bg-secondary-600 text-white cursor-not-allowed' 
+                : 'bg-secondary-500 hover:bg-secondary-600 text-white'
+            }`}
+            aria-label="Refresh services from admin panel changes"
+          >
+            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            {isRefreshing ? 'Refreshing...' : 'Refresh Services'}
+          </button>
         </div>
 
         {/* Services Grid */}

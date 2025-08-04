@@ -1,8 +1,11 @@
 // CMS Services Data Store - Controls Public Website Content
 import { Service } from '@/lib/types/admin';
 
-// This data powers BOTH the admin panel AND the public website
-export let servicesData: Service[] = [
+// Storage key for localStorage persistence
+const STORAGE_KEY = 'farvue_cms_services';
+
+// Default services data
+const defaultServicesData: Service[] = [
   {
     id: '1',
     name: 'Video Editing',
@@ -149,8 +152,43 @@ export let servicesData: Service[] = [
   }
 ];
 
+// localStorage persistence functions
+const saveToStorage = (data: Service[]) => {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.error('Failed to save services to localStorage:', error);
+    }
+  }
+};
+
+const loadFromStorage = (): Service[] => {
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (error) {
+      console.error('Failed to load services from localStorage:', error);
+    }
+  }
+  return defaultServicesData;
+};
+
+// Initialize services data from storage or defaults
+export let servicesData: Service[] = loadFromStorage();
+
+// Function to get current services data (always fresh)
+export const getServicesData = (): Service[] => {
+  servicesData = loadFromStorage();
+  return servicesData;
+};
+
 // CMS Functions to manage services data
 export const updateService = (id: string, updatedService: Partial<Service>) => {
+  servicesData = getServicesData(); // Load fresh data
   const index = servicesData.findIndex(service => service.id === id);
   if (index !== -1) {
     servicesData[index] = {
@@ -158,11 +196,13 @@ export const updateService = (id: string, updatedService: Partial<Service>) => {
       ...updatedService,
       updatedAt: new Date().toISOString()
     };
+    saveToStorage(servicesData); // Persist changes
   }
   return servicesData[index];
 };
 
 export const addService = (newService: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>) => {
+  servicesData = getServicesData(); // Load fresh data
   const service: Service = {
     ...newService,
     id: (servicesData.length + 1).toString(),
@@ -170,60 +210,73 @@ export const addService = (newService: Omit<Service, 'id' | 'createdAt' | 'updat
     updatedAt: new Date().toISOString()
   };
   servicesData.push(service);
+  saveToStorage(servicesData); // Persist changes
   return service;
 };
 
 export const deleteService = (id: string) => {
+  servicesData = getServicesData(); // Load fresh data
   const index = servicesData.findIndex(service => service.id === id);
   if (index !== -1) {
     const deletedService = servicesData[index];
     servicesData.splice(index, 1);
+    saveToStorage(servicesData); // Persist changes
     return deletedService;
   }
   return null;
 };
 
 export const toggleServiceVisibility = (id: string) => {
+  servicesData = getServicesData(); // Load fresh data
   const service = servicesData.find(s => s.id === id);
   if (service) {
     service.isVisible = !service.isVisible;
     service.updatedAt = new Date().toISOString();
+    saveToStorage(servicesData); // Persist changes
   }
   return service;
 };
 
 export const getVisibleServices = () => {
+  servicesData = getServicesData(); // Load fresh data
   return servicesData.filter(service => service.isVisible);
 };
 
 export const getServiceById = (id: string) => {
+  servicesData = getServicesData(); // Load fresh data
   return servicesData.find(service => service.id === id);
 };
 
 export const getServicesByCategory = (category: Service['category']) => {
+  servicesData = getServicesData(); // Load fresh data
   return servicesData.filter(service => service.category === category);
 };
 
 export const updateServicePricing = (id: string, pricing: Service['pricing']) => {
+  servicesData = getServicesData(); // Load fresh data
   const service = servicesData.find(s => s.id === id);
   if (service) {
     service.pricing = pricing;
     service.updatedAt = new Date().toISOString();
+    saveToStorage(servicesData); // Persist changes
   }
   return service;
 };
 
 export const uploadServiceImage = (id: string, imageType: 'iconUrl' | 'imageUrl', imageUrl: string) => {
+  servicesData = getServicesData(); // Load fresh data
   const service = servicesData.find(s => s.id === id);
   if (service) {
     service[imageType] = imageUrl;
     service.updatedAt = new Date().toISOString();
+    saveToStorage(servicesData); // Persist changes
   }
   return service;
 };
 
 // Utility functions for CMS
 export const getServiceStats = () => {
+  servicesData = getServicesData(); // Load fresh data
   return {
     totalServices: servicesData.length,
     visibleServices: servicesData.filter(s => s.isVisible).length,
@@ -237,6 +290,7 @@ export const getServiceStats = () => {
 };
 
 export const exportServicesData = () => {
+  servicesData = getServicesData(); // Load fresh data
   return JSON.stringify(servicesData, null, 2);
 };
 
@@ -245,6 +299,7 @@ export const importServicesData = (jsonData: string) => {
     const importedServices = JSON.parse(jsonData);
     if (Array.isArray(importedServices)) {
       servicesData = importedServices;
+      saveToStorage(servicesData); // Persist imported data
       return true;
     }
     return false;
@@ -252,4 +307,10 @@ export const importServicesData = (jsonData: string) => {
     console.error('Failed to import services data:', error);
     return false;
   }
+};
+
+// Trigger a refresh of services data (useful for forcing updates)
+export const refreshServicesData = () => {
+  servicesData = getServicesData();
+  return servicesData;
 };

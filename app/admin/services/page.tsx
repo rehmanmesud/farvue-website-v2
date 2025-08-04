@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { Service } from '@/lib/types/admin';
 import { 
-  servicesData, 
+  getServicesData, 
   updateService, 
   addService, 
   deleteService, 
@@ -33,7 +33,7 @@ import {
 } from '@/lib/data/cms-services';
 
 export default function ServicesManagementPage() {
-  const [services, setServices] = useState<Service[]>(servicesData);
+  const [services, setServices] = useState<Service[]>(getServicesData());
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -43,7 +43,8 @@ export default function ServicesManagementPage() {
 
   // Refresh services data
   const refreshServices = () => {
-    setServices([...servicesData]);
+    setServices([...getServicesData()]);
+    console.log('🔄 Admin services refreshed from localStorage');
   };
 
   // Handle service creation
