@@ -180,3 +180,33 @@ export interface Settings {
     push: boolean;
   };
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  bio: string;
+  skills: string[];
+  social: {
+    linkedin?: string;
+    twitter?: string;
+    instagram?: string;
+    github?: string;
+    website?: string;
+  };
+  order: number;
+  isVisible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TeamSettings {
+  sectionLabel: string;
+  heading: string;
+  description: string;
+  buttonText: string;
+  buttonUrl: string;
+  showStats: boolean;
+  isVisible: boolean;
+}

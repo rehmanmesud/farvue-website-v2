@@ -13,7 +13,8 @@ import {
   Video,
   Palette,
   Bot,
-  Code
+  Code,
+  UserCheck
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -28,6 +29,7 @@ export default function AdminSidebar() {
     { id: 'dashboard', label: 'Dashboard', icon: Home, href: '/admin' },
     { id: 'projects', label: 'Projects', icon: FolderOpen, href: '/admin/projects' },
     { id: 'services', label: 'Services', icon: Video, href: '/admin/services' },
+    { id: 'team', label: 'Team', icon: UserCheck, href: '/admin/team' },
     { id: 'clients', label: 'Clients', icon: Users, href: '/admin/clients' },
     { id: 'analytics', label: 'Analytics', icon: BarChart3, href: '/admin/analytics' },
     { id: 'settings', label: 'Settings', icon: Settings, href: '/admin/settings' },

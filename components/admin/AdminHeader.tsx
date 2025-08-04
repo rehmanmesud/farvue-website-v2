@@ -19,6 +19,7 @@ export default function AdminHeader() {
     { id: 'dashboard', label: 'Dashboard', href: '/admin' },
     { id: 'projects', label: 'Projects', href: '/admin/projects' },
     { id: 'services', label: 'Services', href: '/admin/services' },
+    { id: 'team', label: 'Team', href: '/admin/team' },
     { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
   ];
 

@@ -1,7 +1,9 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Linkedin, Twitter, Instagram, Github, Globe, RefreshCw } from 'lucide-react';
+import { getTeamData, getTeamSettings, refreshTeamData } from '@/lib/data/cms-team';
 
 const Team = () => {
   const { ref, inView } = useInView({
@@ -9,36 +11,70 @@ const Team = () => {
     threshold: 0.1,
   });
 
-  const handleBookCall = () => {
-    window.open('https://calendly.com/farvuemedia', '_blank');
+  // State for CMS-managed team data
+  const [teamMembers, setTeamMembers] = useState(getTeamData());
+  const [teamSettings, setTeamSettings] = useState(getTeamSettings());
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Manual refresh function
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      const refreshedData = refreshTeamData();
+      setTeamMembers(refreshedData.members.filter(m => m.isVisible).sort((a, b) => a.order - b.order));
+      setTeamSettings(refreshedData.settings);
+      console.log('✅ Team data refreshed from admin changes');
+    } catch (error) {
+      console.error('❌ Failed to refresh team data:', error);
+    } finally {
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
   };
 
-  const teamMembers = [
-    {
-      name: 'Rehmanmesud',
-      role: 'Founder & Lead Strategist',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face&auto=format',
-      bio: 'Founder of FARVUE Media. With a deep passion for storytelling and over 3 years of creative leadership, Rehman helps creators scale with strategy-backed, high-retention video content.',
-      skills: ['Creative Direction', 'Content Strategy', 'After Effects', 'Premiere Pro'],
-      social: {
-        linkedin: 'https://linkedin.com/in/rehmanmesud',
-        twitter: 'https://twitter.com/rehmanmesud',
-        instagram: 'https://instagram.com/rehmanmesud'
+  // Refresh team data from CMS (real-time updates)
+  useEffect(() => {
+    const refreshTeam = () => {
+      const refreshedData = refreshTeamData();
+      setTeamMembers(refreshedData.members.filter(m => m.isVisible).sort((a, b) => a.order - b.order));
+      setTeamSettings(refreshedData.settings);
+    };
+    
+    // Refresh every 3 seconds to pick up admin changes
+    const interval = setInterval(refreshTeam, 3000);
+    
+    // Also refresh when the page becomes visible (tab switching)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        refreshTeam();
       }
-    },
-    {
-      name: 'Fazal Mesud',
-      role: 'Co-Founder & Design Head',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format',
-      bio: 'Co-founder of FARVUE Media. Fazal blends creativity and psychology to craft thumbnails and visuals that stop the scroll and elevate creator brands.',
-      skills: ['Photoshop', 'Illustrator', 'Figma', 'Visual Branding'],
-      social: {
-        linkedin: 'https://linkedin.com/in/fazalmesud',
-        twitter: 'https://twitter.com/fazalmesud',
-        instagram: 'https://instagram.com/fazalmesud'
-      }
-    }
-  ];
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  const handleBookCall = () => {
+    window.open(teamSettings.buttonUrl || 'https://calendly.com/farvuemedia', '_blank');
+  };
+
+  // Get social media icon component
+  const getSocialIcon = (platform: string) => {
+    const icons = {
+      linkedin: Linkedin,
+      twitter: Twitter,
+      instagram: Instagram,
+      github: Github,
+      website: Globe
+    };
+    return icons[platform as keyof typeof icons] || Globe;
+  };
+
+  // If team section is not visible, don't render
+  if (!teamSettings.isVisible) return null;
 
   return (
     <section 
@@ -51,35 +87,56 @@ const Team = () => {
         {/* Section Header */}
         <div className='text-center mb-16'>
           <p className='text-secondary-400 font-medium mb-4 tracking-wider uppercase text-sm'>
-            Duo
+            {teamSettings.sectionLabel}
           </p>
-          <h2 className='heading-lg mb-6'>
-            Meet the{' '}
-            <span className='text-accent italic'>incredible</span>{' '}
-            duo.
+          <h2 className='text-h2 font-bold leading-tight mb-6'>
+            {teamSettings.heading.split(' ').map((word, index) => 
+              word === 'incredible' ? (
+                <span key={index} className='text-accent-red u-underline'>{word}</span>
+              ) : (
+                <span key={index}>{word} </span>
+              )
+            )}
           </h2>
-          <p className='text-gray-300 text-lg max-w-3xl mx-auto mb-8'>
-            We pride ourselves of being the best of the best and we encapsulates that.
+          <p className='lead max-w-3xl mx-auto mb-6'>
+            {teamSettings.description}
           </p>
           
-          <button
-            onClick={handleBookCall}
-            className='btn-primary text-lg px-8 py-4 shadow-glow'
-            aria-label='Book a 30-minute consultation call'
-          >
-            Book a 30-min call →
-          </button>
+          {/* CMS Refresh Button */}
+          <div className='flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8'>
+            <button
+              onClick={handleBookCall}
+              className='btn-primary text-lg px-8 py-4 shadow-glow'
+              aria-label='Book a consultation call'
+            >
+              {teamSettings.buttonText}
+            </button>
+            
+            <button
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                isRefreshing 
+                  ? 'bg-secondary-600 text-white cursor-not-allowed' 
+                  : 'bg-secondary-500 hover:bg-secondary-600 text-white'
+              }`}
+              aria-label="Refresh team data from admin panel changes"
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+              {isRefreshing ? 'Refreshing...' : 'Refresh Team'}
+            </button>
+          </div>
         </div>
 
-        {/* Team Grid */}
+        {/* Team Grid - Centered regardless of member count */}
         <div 
           ref={ref}
-          className='grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto'
+          className='flex flex-wrap justify-center gap-8 max-w-6xl mx-auto'
         >
           {teamMembers.map((member, index) => (
             <div
-              key={member.name}
-              className={`group transition-all duration-700 ${
+              key={member.id}
+              className={`w-full max-w-sm group transition-all duration-700 ${
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
@@ -98,34 +155,23 @@ const Team = () => {
                   {/* Overlay with social links */}
                   <div className='absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                     <div className='absolute bottom-6 left-6 right-6'>
-                      <div className='flex space-x-4'>
-                        <a
-                          href={member.social.linkedin}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          className='w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-secondary-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
-                          aria-label={`${member.name}'s LinkedIn profile`}
-                        >
-                          <Linkedin className='w-5 h-5' />
-                        </a>
-                        <a
-                          href={member.social.twitter}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          className='w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-secondary-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
-                          aria-label={`${member.name}'s Twitter profile`}
-                        >
-                          <Twitter className='w-5 h-5' />
-                        </a>
-                        <a
-                          href={member.social.instagram}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          className='w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-secondary-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
-                          aria-label={`${member.name}'s Instagram profile`}
-                        >
-                          <Instagram className='w-5 h-5' />
-                        </a>
+                      <div className='flex justify-center space-x-4'>
+                        {Object.entries(member.social).map(([platform, url]) => {
+                          if (!url) return null;
+                          const IconComponent = getSocialIcon(platform);
+                          return (
+                            <a
+                              key={platform}
+                              href={url}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-secondary-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary-500'
+                              aria-label={`${member.name}'s ${platform} profile`}
+                            >
+                              <IconComponent className='w-5 h-5' />
+                            </a>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -164,28 +210,30 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Team Stats */}
-        <div 
-          className={`grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16 pt-16 border-t border-dark-700 transition-all duration-700 delay-600 ${
-            inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {[
-            { label: 'Years Experience', value: '5+' },
-            { label: 'Videos Edited', value: '500+' },
-            { label: 'Happy Clients', value: '50+' },
-            { label: 'Total Views', value: '10M+' }
-          ].map((stat, index) => (
-            <div key={stat.label} className='text-center'>
-              <div className='text-3xl lg:text-4xl font-bold text-accent-500 mb-2'>
-                {stat.value}
+        {/* Team Stats - Only show if enabled in settings */}
+        {teamSettings.showStats && (
+          <div 
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-8 mt-16 pt-16 border-t border-dark-700 transition-all duration-700 delay-600 ${
+              inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {[
+              { label: 'Years Experience', value: '5+' },
+              { label: 'Videos Edited', value: '500+' },
+              { label: 'Happy Clients', value: '50+' },
+              { label: 'Total Views', value: '10M+' }
+            ].map((stat, index) => (
+              <div key={stat.label} className='text-center'>
+                <div className='text-3xl lg:text-4xl font-bold text-accent-red mb-2'>
+                  {stat.value}
+                </div>
+                <div className='text-gray-400 text-sm uppercase tracking-wider'>
+                  {stat.label}
+                </div>
               </div>
-              <div className='text-gray-400 text-sm uppercase tracking-wider'>
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
